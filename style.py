@@ -59,11 +59,26 @@ def main(args):
     if args.epochs:
         num_epochs = args.epochs
     else:
-        num_epochs = 4000
+        num_epochs = 3000
 
     optimizer = torch.optim.Adam([input])
     alpha = args.alpha
     beta = args.beta
+
+    # Create folder to store results
+    now = datetime.now()
+    date_str = now.strftime("%d-%m-%Y_%H-%M-%S")
+    out_path = "Results\\" + date_str
+    os.makedirs(out_path)
+
+    # Save hyperparameters 
+    with open(out_path + '/config.txt', 'w') as f:
+        l_eps = "Epochs: " + str(num_epochs) + '\n'
+        l_alpha = "alpha: " + str(alpha) + '\n'
+        l_beta = "beta: " + str(beta) + '\n'
+        l_style_img = "Style image path: " + style_img_path + '\n'
+        l_content_img = "Content image path: " + content_img_path 
+        f.writelines([l_eps, l_alpha, l_beta, l_style_img, l_content_img])
 
     # Main training loop
     for epoch in tqdm(range(num_epochs), desc="Progress..."):
@@ -94,22 +109,9 @@ def main(args):
         
         if  (epoch + 1) % 50 == 0:
             print('\nTotal loss: ', total_loss.item())
-            plot_imgs(input)
+            plot_imgs(input, seq_no=(epoch + 1) // 50, lp_path=out_path, log_process=args.lp)
     
-    # Save hyperparameters and result
-    now = datetime.now()
-    date_str = now.strftime("%d-%m-%Y_%H-%M-%S")
-    out_path = "Results\\" + date_str
-    os.makedirs(out_path)
-
-    with open(out_path + '/config.txt', 'w') as f:
-        l_eps = "Epochs: " + str(num_epochs) + '\n'
-        l_alpha = "alpha: " + str(alpha) + '\n'
-        l_beta = "beta: " + str(beta) + '\n'
-        l_style_img = "Style image path: " + style_img_path + '\n'
-        l_content_img = "Content image path: " + content_img_path 
-        f.writelines([l_eps, l_alpha, l_beta, l_style_img, l_content_img])
-
+    # Save result
     torchvision.utils.save_image(input, '{folder}\\{file}.jpg'.format(folder=out_path, file=args.o_filename))   
 
 if __name__ == '__main__':
@@ -121,6 +123,7 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', type=int, help='Optional: Number of epochs to perform style transfer for (default: 4000 steps).')
     parser.add_argument('--alpha', type=float, required=True, help='Weight for content loss.')
     parser.add_argument('--beta', type=float, required=True, help='Weight for style loss.')
+    parser.add_argument('--lp', type=bool, required=True, help='Save a sequence of images that show the style transfer process.')
 
     args = parser.parse_args()
     main(args)
