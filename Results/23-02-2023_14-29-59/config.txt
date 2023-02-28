@@ -1,5 +1,0 @@
-Epochs: 4000
-alpha: 1.0
-beta: 1000.0
-Style image path: .\imgs\styles\vassily.jpg
-Content image path: .\imgs\content\labrador.jpg
