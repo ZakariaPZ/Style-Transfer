@@ -2,18 +2,27 @@ import torch
 import torchvision
 import torchvision.models as models
 from tqdm import tqdm
-from utils import load_img, extract_feats, gram_matrix, content_loss, style_loss
+from utils import preproc_img, extract_feats, gram_matrix, content_loss, style_loss
 import argparse
 from plot_utils import plot_imgs
 import os
 from datetime import datetime
+from PIL import Image
 
 cuda_avail = torch.cuda.is_available()
 device = torch.device("cuda" if cuda_avail else "cpu")
 
 
 def main(args):
-    aspect_ratio = args.a_ratio
+
+    # Load images
+    content_img = Image.open(args.c_path)
+    style_img = Image.open(args.s_path)
+
+    # Configure aspect ratio
+    width, height = content_img.size
+    aspect_ratio = width/height
+
     if aspect_ratio > 1:
         w = 512
         h = int(w/aspect_ratio)
@@ -25,8 +34,9 @@ def main(args):
     style_img_path = args.s_path
     content_img_path = args.c_path
     
-    content = load_img(content_img_path, img_size)
-    style = load_img(style_img_path, img_size) 
+    # Preprocess content and style images
+    content = preproc_img(content_img, img_size)
+    style = preproc_img(style_img, img_size) 
     input = content.clone().to(device)
     
     # Load pretrained model

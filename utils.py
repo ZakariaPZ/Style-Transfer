@@ -8,13 +8,10 @@ from plot_utils import plot_imgs
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def load_img(img_path, img_size):
+def preproc_img(img_path, img_size):
     '''
     Returns style and content images as tensors
     '''
-
-    # Load images
-    img = Image.open(img_path)
 
     img_preproc = transforms.Compose([
         transforms.Resize(img_size),
