@@ -19,7 +19,7 @@ def main(args):
         h = int(w/aspect_ratio)
     else:
         h = 512
-        w = int(h/aspect_ratio)
+        w = int(h*aspect_ratio)
     img_size = (h, w)
     
     style_img_path = args.s_path
@@ -112,7 +112,8 @@ def main(args):
             plot_imgs(input, seq_no=(epoch + 1) // 50, lp_path=out_path, log_process=args.lp)
     
     # Save result
-    torchvision.utils.save_image(input, '{folder}\\{file}.jpg'.format(folder=out_path, file=args.o_filename))   
+    img = torchvision.transforms.ToPILImage()(img)
+    img.save('{folder}\\{file}.jpg'.format(folder=out_path, file=args.o_filename))   
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='Neural Style Transfer', description='Combine content and style of two images.')
