@@ -130,7 +130,6 @@ if __name__ == '__main__':
     parser.add_argument('--s_path', type=str, required=True, help='Style image filepath.')
     parser.add_argument('--c_path', type=str, required=True, help='Content image filepath.')
     parser.add_argument('--o_filename', type=str, required=True, help='Output image filename.')
-    parser.add_argument('--a_ratio', type=float, required=True, help='Desired aspect ratio for output image (w/h).')
     parser.add_argument('--epochs', type=int, help='Optional: Number of epochs to perform style transfer for (default: 4000 steps).')
     parser.add_argument('--alpha', type=float, required=True, help='Weight for content loss.')
     parser.add_argument('--beta', type=float, required=True, help='Weight for style loss.')
