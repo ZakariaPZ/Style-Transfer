@@ -10,6 +10,9 @@ We subsequently train an <i>input</i> image, rather than neural network weights,
 
 The final result is an image containing the desired content, but reconstructed in the style of the style image.
 
+## Demo 
+![](https://github.com/ZakariaPZ/Style-Transfer/blob/main/CN.gif)
+
 ## Usage
 To use this program:
 - Clone this repository 
