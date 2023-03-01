@@ -8,7 +8,7 @@ from plot_utils import plot_imgs
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def preproc_img(img_path, img_size):
+def preproc_img(img, img_size):
     '''
     Returns style and content images as tensors
     '''

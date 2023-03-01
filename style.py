@@ -36,7 +36,7 @@ def main(args):
     
     # Preprocess content and style images
     content = preproc_img(content_img, img_size)
-    style = preproc_img(style_img, img_size) 
+    style = preproc_img(style_img, img_size)
     input = content.clone().to(device)
     
     # Load pretrained model
@@ -122,7 +122,7 @@ def main(args):
             plot_imgs(input, seq_no=(epoch + 1) // 50, lp_path=out_path, log_process=args.lp)
     
     # Save result
-    img = torchvision.transforms.ToPILImage()(img)
+    img = torchvision.transforms.ToPILImage()(input)
     img.save('{folder}\\{file}.jpg'.format(folder=out_path, file=args.o_filename))   
 
 if __name__ == '__main__':
