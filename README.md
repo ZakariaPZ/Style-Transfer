@@ -1,6 +1,6 @@
 # Neural Style Transfer 
 
-This project is an implementation of the paper titled [A Neural Algorithm of Artistic Styles](https://arxiv.org/abs/1508.06576). Style transfer uses representations learned by a pre-trained network to combine the style of one image with the content of another. 
+This project is an implementation of [Style Transfer](https://arxiv.org/abs/1508.06576). Style transfer uses representations learned by a pre-trained network to combine the style of one image with the content of another. 
 
 Different layers of a deep neural network learn different features of the input image. For instance, the activation maps produced by early convolutional layers generally correspond to lower level features, while deeper layers learn high level <i>content</i> of the image.
 
