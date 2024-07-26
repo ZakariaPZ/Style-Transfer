@@ -4,7 +4,7 @@ This project is an implementation of [Style Transfer](https://arxiv.org/abs/1508
 
 Different layers of a deep neural network learn different features of the input image. For instance, the activation maps produced by early convolutional layers generally correspond to lower level features, while deeper layers learn high level <i>content</i> of the image.
 
-In style transfer, we first pass an image with the desired style through the neural network. We can select the appropriate layers in a network and incorporate their activations into an objective function. We do the same for an image with the desired content, typically selecting a different set of layers (usually a single layer deep in the network is sufficient) to obtain the network's learned representation of the content. Again, this representation is incoroprated into some objective function.
+In style transfer, we first pass an image with the desired style through the neural network. We can select the appropriate layers in a network and incorporate their activations into an objective function. We do the same for an image with the desired content, typically selecting a different set of layers (usually a single layer deep in the network is sufficient) to obtain the network's learned representation of the content. Again, this representation is incorporated into some objective function.
 
 We subsequently train an <i>input</i> image, rather than neural network weights, by enforcing that its content representation should be similar to that of the content image, and its style to that of the style image (we use a gram matrix for this - more details can be found in the paper). 
 
